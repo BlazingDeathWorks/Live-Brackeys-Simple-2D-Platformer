@@ -7,9 +7,9 @@ public class Player : MonoBehaviour
     //Components
     [SerializeField] private Rigidbody2D rb; //Physics of the object, like falling and moving.
 
-    //Player attributes
-    [SerializeField] private float moveSpeed = 4f; //How fast the player moves.
-    [SerializeField] private float jumpSpeed = 6f; //How high the player jumps.
+    //Object attributes
+    [SerializeField] private float moveSpeed = 4f; //How fast the object moves.
+    [SerializeField] private float jumpSpeed = 6f; //How high the object jumps.
 
     //Ground Check attributes
     [SerializeField] private Transform groundCheck; //Child object that detects ground.
@@ -18,13 +18,13 @@ public class Player : MonoBehaviour
 
     //Respawn attributes
     [SerializeField] private float yLimit = -5f; //How low is too low.
-    [SerializeField] private Vector2 spawnPoint; //Where the player respawns.
+    [SerializeField] private Vector2 spawnPoint; //Where the object respawns.
 
     //Unedited variables
-    private float movement; //The direction the player is moving in.
-    private bool isGrounded; //Can the player jump?
+    private float movement; //The direction the object is moving in.
+    private bool isGrounded; //Can the object jump?
 
-    private void Awake() //Happens before everything else in a scene. Good for setting variables.
+    private void Awake() //Happens before everything else in a scene. Good for initializing variables.
     {
         rb = GetComponent<Rigidbody2D>(); //If you do not want to assign the Rigidbody2D in the inspector.
     }
@@ -35,10 +35,10 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed); //On that frame, the player goes up.
+            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed); //On that frame, the object goes up.
         }
 
-        if (transform.position.y <= yLimit) //Checks if the player is too low.
+        if (transform.position.y <= yLimit) //Checks if the object is too low.
         {
             transform.position = spawnPoint; //Respawns.
         }
