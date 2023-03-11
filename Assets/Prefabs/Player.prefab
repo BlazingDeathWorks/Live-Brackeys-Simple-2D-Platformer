@@ -87,8 +87,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundCheckSize: {x: 0.45, y: 0.1}
-  yLimit: -5
-  spawnPoint: {x: -8, y: -3.75}
+  yLimit: -6
+  spawnPoint: {x: 0, y: 0}
 --- !u!212 &700744816254776825
 SpriteRenderer:
   m_ObjectHideFlags: 0
