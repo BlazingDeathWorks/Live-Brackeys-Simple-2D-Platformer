@@ -22,7 +22,8 @@ public class Player : MonoBehaviour
 
     //Unedited variables
     private float movement; //The direction the object is moving in.
-    private bool isGrounded; //Can the object jump?
+    private bool isGrounded; //Is the object on the ground (and can jump)?
+    private bool isJumping; //Is the object jumping?
 
     private void Awake() //Happens before everything else in a scene. Good for initializing variables.
     {
@@ -33,9 +34,9 @@ public class Player : MonoBehaviour
     {
         movement = Input.GetAxisRaw("Horizontal"); //Use 'GetAxis' for smooth acceleration and 'GetAxisRaw' for immediate acceleration.
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) //If the key is pressed on the ground...
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed); //On that frame, the object goes up.
+            isJumping = true; //...the object is jumping.
         }
 
         if (transform.position.y <= yLimit) //Checks if the object is too low.
@@ -49,6 +50,12 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(movement * moveSpeed, rb.velocity.y); //The Y is kept as it is so gravity can work.
 
         isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0, groundLayer); //If the groundCheck area hits the groundLayer, isGrounded is true.
+
+        if (isJumping) //If the object is jumping...
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed); //...the object goes up...
+            isJumping = false; //...and is no longer considered 'jumping'.
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) //Every time a collision happens.
