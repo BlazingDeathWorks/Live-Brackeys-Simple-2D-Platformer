@@ -960,7 +960,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1646761086
+--- !u!4 &1714478317 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9040335140874475975, guid: f3fad2a5762f74248b168baf73e1c65e, type: 3}
+  m_PrefabInstance: {fileID: 1179275875}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1756254651
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -968,18 +973,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 700744816254776825, guid: 25ac6530c1d74c5428daf9f0382a929b, type: 3}
-      propertyPath: m_Color.b
-      value: 0.2509804
-      objectReference: {fileID: 0}
-    - target: {fileID: 700744816254776825, guid: 25ac6530c1d74c5428daf9f0382a929b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.101960786
-      objectReference: {fileID: 0}
-    - target: {fileID: 700744816254776825, guid: 25ac6530c1d74c5428daf9f0382a929b, type: 3}
-      propertyPath: m_Color.r
-      value: 0.023529412
-      objectReference: {fileID: 0}
     - target: {fileID: 6954396296669883476, guid: 25ac6530c1d74c5428daf9f0382a929b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1033,11 +1026,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25ac6530c1d74c5428daf9f0382a929b, type: 3}
---- !u!4 &1714478317 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9040335140874475975, guid: f3fad2a5762f74248b168baf73e1c65e, type: 3}
-  m_PrefabInstance: {fileID: 1179275875}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1775532699
 PrefabInstance:
   m_ObjectHideFlags: 0
