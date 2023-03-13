@@ -4,35 +4,31 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    //Components
-    [SerializeField] private Rigidbody2D rb; //Physics of the object, like falling and moving.
+    [SerializeField] private float moveSpeed; 
+    [SerializeField] private float turnRate; 
 
-    //Object attributes
-    [SerializeField] private float moveSpeed; //How fast the object moves.
-    [SerializeField] private float turnTimeMax; //Amount of time it takes for the object to turn around.
+    private float turnTime;
+    private Rigidbody2D rb;
 
-    //Unedited variables
-    private float turnTime; //Amount of time left before the object turns around.
-
-    void Awake() //Happens before everything else in a scene. Good for initializing variables.
+    void Awake()
     {
-        turnTime = turnTimeMax; //Initialize timer.
-        rb = GetComponent<Rigidbody2D>(); //If you do not want to assign the Rigidbody2D in the inspector.
+        turnTime = turnRate; 
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update() //Every frame, is affected by frame rate. This can be fixed with Time.deltaTime in most cases.
+    void Update()
     {
-        turnTime -= Time.deltaTime; //Variable decreases by an amount independent of frame rate.
+        turnTime -= Time.deltaTime;
 
-        if (turnTime <= 0) //If the timer reaches 0...
+        if (turnTime <= 0) 
         {
-            moveSpeed = -moveSpeed; //...the variable is set to the opposite (ex: 1 to -1, -1 to 1)...
-            turnTime = turnTimeMax; //...and the timer resets.
+            moveSpeed = -moveSpeed; 
+            turnTime = turnRate;
         }
     }
 
-    void FixedUpdate() //Every 0.02 seconds, or 50 times per second. Good for physics.
+    void FixedUpdate() 
     {
-        rb.velocity = new Vector2(moveSpeed, rb.velocity.y); //The object moves horizontally at a set speed and vertically based on gravity.
+        rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
     }
 }

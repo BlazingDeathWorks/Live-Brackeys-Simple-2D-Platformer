@@ -4,65 +4,58 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //Components
-    [SerializeField] private Rigidbody2D rb; //Physics of the object, like falling and moving.
-
     //Object attributes
-    [SerializeField] private float moveSpeed = 4f; //How fast the object moves.
-    [SerializeField] private float jumpSpeed = 6f; //How high the object jumps.
+    [SerializeField] private float moveSpeed = 4f; 
+    [SerializeField] private float jumpSpeed = 6f; 
 
     //Ground Check attributes
-    [SerializeField] private Transform groundCheck; //Child object that detects ground.
-    [SerializeField] private LayerMask groundLayer; //The layer detected as the ground layer.
-    [SerializeField] private Vector2 groundCheckSize; //Area that detects the ground layer.
+    [SerializeField] private Transform groundCheck; 
+    [SerializeField] private LayerMask groundLayer; 
+    [SerializeField] private Vector2 groundCheckSize;
 
     //Respawn attributes
-    [SerializeField] private float yLimit = -5f; //How low is too low.
-    [SerializeField] private Vector2 spawnPoint; //Where the object respawns.
+    [SerializeField] private float yLimit = -5f; 
+    [SerializeField] private Vector2 spawnPoint; 
 
-    //Unedited variables
-    private float movement; //The direction the object is moving in.
-    private bool isGrounded; //Is the object on the ground (and can jump)?
-    private bool isJumping; //Is the object jumping?
+    private float movement; 
+    private bool isGrounded;
+    private bool isJumping;
+    private Rigidbody2D rb;
 
-    private void Awake() //Happens before everything else in a scene. Good for initializing variables.
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>(); //If you do not want to assign the Rigidbody2D in the inspector.
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update() //Every frame, is affected by frame rate. Good for input, bad for physics.
+    private void Update()
     {
-        movement = Input.GetAxisRaw("Horizontal"); //Use 'GetAxis' for smooth acceleration and 'GetAxisRaw' for immediate acceleration.
+        movement = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) //If the key is pressed on the ground...
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) 
         {
-            isJumping = true; //...the object is jumping.
-        }
-
-        if (transform.position.y <= yLimit) //Checks if the object is too low.
-        {
-            transform.position = spawnPoint; //Respawns.
+            isJumping = true;
         }
     }
 
-    private void FixedUpdate() //Every 0.02 seconds, or 50 times per second. Good for physics, bad for input.
+    private void FixedUpdate() 
     {
-        rb.velocity = new Vector2(movement * moveSpeed, rb.velocity.y); //The Y is kept as it is so gravity can work.
+        rb.velocity = new Vector2(movement * moveSpeed, rb.velocity.y);
 
-        isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0, groundLayer); //If the groundCheck area hits the groundLayer, isGrounded is true.
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0, groundLayer);
 
-        if (isJumping) //If the object is jumping...
+        if (isJumping) 
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed); //...the object goes up...
-            isJumping = false; //...and is no longer considered 'jumping'.
+            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+            isJumping = false;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) //Every time a collision happens.
+    private void OnCollisionEnter2D(Collision2D collision) 
     {
-        if (collision.gameObject.CompareTag("Enemy")) //Checks if an enemy has been hit.
+        //Respawn on Enemy Collision
+        if (collision.gameObject.CompareTag("Enemy")) 
         {
-            transform.position = spawnPoint; //Respawns.
+            transform.position = spawnPoint;
         }
     }
 }
