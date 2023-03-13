@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float jumpSpeed = 6f; 
 
     //Ground Check attributes
-    [SerializeField] private Transform groundCheckPos; 
     [SerializeField] private LayerMask groundLayer; 
     [SerializeField] private Vector2 groundCheckSize;
 
@@ -20,11 +19,14 @@ public class Player : MonoBehaviour
     private float movement; 
     private bool isGrounded;
     private bool isJumping;
+
     private Rigidbody2D rb;
+    private Transform groundCheckPos;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        groundCheckPos = GetComponentInChildren<Transform>();
     }
 
     private void Update()
