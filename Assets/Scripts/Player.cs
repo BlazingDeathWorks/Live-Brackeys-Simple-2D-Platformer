@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float jumpSpeed = 6f; 
 
     //Ground Check attributes
-    [SerializeField] private Transform groundCheck; 
+    [SerializeField] private Transform groundCheckPos; 
     [SerializeField] private LayerMask groundLayer; 
     [SerializeField] private Vector2 groundCheckSize;
 
@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     {
         movement = Input.GetAxisRaw("Horizontal");
 
+        //Jump Input
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded) 
         {
             isJumping = true;
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour
     {
         rb.velocity = new Vector2(movement * moveSpeed, rb.velocity.y);
 
-        isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0, groundLayer);
+        isGrounded = Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer);
 
         if (isJumping) 
         {
