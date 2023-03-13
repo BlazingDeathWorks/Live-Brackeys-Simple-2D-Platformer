@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //Object attributes
     [SerializeField] private float moveSpeed = 4f; 
     [SerializeField] private float jumpSpeed = 6f; 
 
-    //Ground Check attributes
     [SerializeField] private LayerMask groundLayer; 
     [SerializeField] private Vector2 groundCheckSize;
 
-    //Respawn attributes
-    [SerializeField] private float yLimit = -5f; 
     [SerializeField] private Vector2 spawnPoint; 
 
     private float movement; 
@@ -26,14 +22,13 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        groundCheckPos = GetComponentInChildren<Transform>();
+        groundCheckPos = transform.GetChild(0);
     }
 
     private void Update()
     {
         movement = Input.GetAxisRaw("Horizontal");
 
-        //Jump Input
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded) 
         {
             isJumping = true;
@@ -55,7 +50,6 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) 
     {
-        //Respawn on Enemy Collision
         if (collision.gameObject.CompareTag("Enemy")) 
         {
             transform.position = spawnPoint;
